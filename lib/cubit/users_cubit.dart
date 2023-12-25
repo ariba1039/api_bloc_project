@@ -14,7 +14,7 @@ class UsersCubit extends Cubit<UsersState> {
 
       var data = await usersRepo.getProducts();
 
-      emit(UsersLoadedState( data, usersModel: []));
+      emit(UsersLoadedState( data, ));
     } catch (e) {
       emit(UsersErrorState(e.toString(), errorMessage: ''));
     }

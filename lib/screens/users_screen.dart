@@ -29,10 +29,28 @@ class _UsersScreenState extends State<UsersScreen> {
               child: CircularProgressIndicator(),
             );
           } else if (state is UsersLoadedState) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 20,
+              ),
               itemCount: state.usersModel.length,
               itemBuilder: (context, index) {
-                return Text(state.usersModel[index].email!);
+                var data = state.usersModel[index];
+                return Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data.name!,
+                        style: const TextStyle(fontSize: 22),
+                      ),
+                      Text(
+                        data.email!,
+                        style: const TextStyle(fontSize: 22),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           } else if (state is UsersErrorState) {
