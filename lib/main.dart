@@ -1,13 +1,22 @@
 import 'package:api_bloc_project/bloc/products_bloc.dart';
+import 'package:api_bloc_project/cubit/users_cubit.dart';
+import 'package:api_bloc_project/debug/bloc_observer.dart';
 import 'package:api_bloc_project/repo/products_repo.dart';
+import 'package:api_bloc_project/repo/users_repo.dart';
 import 'package:api_bloc_project/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  // we can also qwrap this with repository provider
-  runApp(RepositoryProvider(
-      create: (context) => ProductsRepo(), child: const MyApp()));
+  Bloc.observer = MyBlocObserver();
+  runApp(MultiRepositoryProvider(providers: [
+    RepositoryProvider(
+      create: (context) => ProductsRepo(),
+    ),
+    RepositoryProvider(
+      create: (context) => UsersRepo(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,17 +24,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsBloc(ProductsRepo()),
-      // providers: [
-      //   BlocProvider(
-      //     create: (context) => ProductsBloc(),
-      //   ),
-      //  BlocProvider(
-      //   create: (context) => ProductsBloc(),
-      // ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProductsBloc(ProductsRepo()),
+          // providers: [
+          //   BlocProvider(
+          //     create: (context) => ProductsBloc(),
+          //   ),
+          //  BlocProvider(
+          //   create: (context) => ProductsBloc(),
+          // ),
 
-      // ],
+          // ],
+        ),
+        BlocProvider(
+          create: (context) => UsersCubit(UsersRepo()),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Bloc tutorial',

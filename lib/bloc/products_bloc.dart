@@ -21,7 +21,7 @@ class ProductsBloc extends Bloc<ProductsLoadedEvent, ProductsState> {
 
         var data = await productsRepo.getProducts();
 
-        emit(ProductsloadedState(data, productsModel: const []));
+        emit(ProductsloadedState(productsModel: data));
       } catch (e) {
         emit(ProductsErrorState(e.toString(), errormessage: ''));
       }
