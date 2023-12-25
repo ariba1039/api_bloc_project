@@ -23,7 +23,7 @@ final class ProductsloadedState extends ProductsState {
 final class ProductsErrorState extends ProductsState {
   final String errormessage;
 
-  const ProductsErrorState(String string, {required this.errormessage});
+  const ProductsErrorState( {required this.errormessage});
 
   @override
   List<Object> get props => [errormessage];

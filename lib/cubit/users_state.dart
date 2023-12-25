@@ -23,7 +23,7 @@ final class UsersLoadedState extends UsersState {
 final class UsersErrorState extends UsersState {
   final String errorMessage;
 
-  UsersErrorState(String string, {required this.errorMessage});
+  UsersErrorState( {required this.errorMessage});
   @override
   List<Object> get props => [errorMessage];
 }
