@@ -16,7 +16,7 @@ class UsersCubit extends Cubit<UsersState> {
 
       emit(UsersLoadedState( data, ));
     } catch (e) {
-      emit(UsersErrorState( errorMessage: ''));
+      emit(UsersErrorState( errorMessage: e.toString()));
     }
   }
 }

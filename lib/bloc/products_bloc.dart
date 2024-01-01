@@ -23,7 +23,7 @@ class ProductsBloc extends Bloc<ProductsLoadedEvent, ProductsState> {
 
         emit(ProductsloadedState(productsModel: data));
       } catch (e) {
-        emit(ProductsErrorState( errormessage: ''));
+        emit(ProductsErrorState( errormessage: e.toString()));
       }
     });
   }
